@@ -8,35 +8,43 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
-import state, {addPost, sendMessages, updateNewPostText} from './redux/state'
+import {ActionsTypes, StoreType} from './redux/state'
 
+type PropsType = {
+    store: StoreType
+    dispatch: (action: ActionsTypes) => void
+}
 
-function App() {
+const App: React.FC<PropsType> = (props) => {
+    const state = props.store.getState();
     let dialogsPages = state.dialogsPage
     let profilesPages = state.profilePage
+    let horizontalLine = <div style={{
+        height: '10px',
+        background: 'linear-gradient(#000000, #ffd700)',
+        gridArea: "q",
+    }}></div>
+    let verticalLine = <div style={{
+        width: '10px',
+        background: 'linear-gradient(to left, rgb(246 196 79), rgb(255, 215, 0))',
+        gridArea: "w",
+    }}></div>
     return (
         <BrowserRouter>
             <div className="app-wrapper">
-                <div style={{
-                    height: '10px',
-                    background: 'linear-gradient(#000000, #ffd700)',
-                    gridArea: "q",
-                }}></div>
+                {horizontalLine}
                 <Header/>
                 <Navbar/>
-                <div style={{
-                    width: '10px',
-                    background: 'linear-gradient(to left, rgb(246 196 79), rgb(255, 215, 0))',
-                    gridArea: "w",
-                }}></div>
+                {verticalLine}
                 <div className="app-wrapper-content">
                     <Route path='/dialogs' render={() => <Dialogs
-                        sendMessage={sendMessages}
+                        sendMessage={props.store.sendMessages}
                         state={dialogsPages}
                     />}/>
                     <Route path='/profile' render={() => <Profile
-                        updateNewPostText={updateNewPostText}
-                        addPost={addPost} state={profilesPages}/>}/>
+                        dispatch={props.dispatch}
+                        state = {profilesPages}
+                    />}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>

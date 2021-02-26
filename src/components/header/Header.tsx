@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../logo.svg';
+import logo from '../img/carrot.svg';
 import s from './Header.module.css'
 
 

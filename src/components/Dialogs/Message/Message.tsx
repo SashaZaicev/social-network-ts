@@ -1,6 +1,5 @@
 import s from "../Dialogs.module.css";
 import React from "react";
-import {PostsPropsType} from "../../Profile/MyPosts/MyPosts";
 
 export type MessagePropsType = {
     message: string
