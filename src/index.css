@@ -1,6 +1,9 @@
 /*html {*/
 /*    background: linear-gradient(to left, rgb(246 196 79), rgb(255, 215, 0));*/
 /*}*/
+html {
+    background: black
+}
 
 body {
     margin: 0;
