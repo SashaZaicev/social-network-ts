@@ -4,9 +4,9 @@ import Post, {PostPropsType} from "./Post/Post";
 
 export type PostsPropsType = {
     posts: Array<PostPropsType>
-    newPostText: any
+    newPostText: string
     updatePostChange: (newPostChange: string) => void
-    addPost: () => void
+    addPost: (newPostText: string) => void
 
 }
 
@@ -18,14 +18,14 @@ const MyPosts: React.FC<PostsPropsType> = (props) => {
             message={p.message}
             likeCount={p.likeCount}/>))
 
-
         let onAddPost = () => {
-            props.addPost()
+            props.addPost(props.newPostText)
         }
         let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
             let newPostChange = e.currentTarget.value
             props.updatePostChange(newPostChange)
         }
+
         return (
             <div className={s.postBlock}>
                 <h3>My post</h3>

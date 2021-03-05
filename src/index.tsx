@@ -3,22 +3,20 @@ import App from "./App";
 import React from "react";
 import './index.css';
 import store, {AppStateType} from "./redux/reduxStore";
+import {Provider} from "react-redux";
 
-export let renderTree = (state: AppStateType) => {
+// export let renderTree = () => {
     ReactDOM.render(
         <React.StrictMode>
-            <App
-                // state={state}
-                store={store}
-                dispatch={store.dispatch.bind(store)}
-            />
+            <Provider store={store}>
+                <App/>
+            </Provider>
         </React.StrictMode>,
         document.getElementById('root')
     );
-}
+// }
 
-store.subscribe(() => {
-    let state = store.getState();
-    renderTree(state)
-})
-renderTree(store.getState())
+// store.subscribe(() => {
+//     renderTree()
+// })
+// renderTree()

@@ -7,18 +7,18 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
-import {ActionsTypes} from './redux/store'
-import {AppStateType} from "./redux/reduxStore";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
-type PropsType = {
-    // state:AppStateType
-    store: any
-    dispatch: (action: ActionsTypes) => void
-}
+// type PropsType = {
+// state:AppStateType
+// store: any
+// dispatch: (action: ActionsTypes) => void
+// }
 
-const App: React.FC<PropsType> = (props) => {
-    const state = props.store.getState();
+// const App: React.FC<PropsType> = (props) => {
+const App = () => {
+    // const state = props.store.getState();
     // let dialogsPages = props.store.getState()dialogsPage
     // let profilesPages = props.store.profilePage
     let horizontalLine = <div style={{
@@ -40,13 +40,14 @@ const App: React.FC<PropsType> = (props) => {
                 {verticalLine}
                 <div className="app-wrapper-content">
                     <Route path='/dialogs' render={() => <DialogsContainer
-                        dispatch={props.dispatch}
-                        store={state.dialogsPage}
+                        // dispatch={props.dispatch}
+                        // store={state.dialogsPage}
                     />}/>
                     <Route path='/profile' render={() => <Profile
-                        dispatch={props.dispatch}
-                        store = {state.profilePage}
+                        // dispatch={props.dispatch}
+                        // store = {state.profilePage}
                     />}/>
+                    <Route path='/users' render={() => <UsersContainer/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
