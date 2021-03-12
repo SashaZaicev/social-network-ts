@@ -1,12 +1,17 @@
-.btnFollow{
+.btnFollow {
     color: orange;
     background: black;
     /*cursor: url("./src/components/img/carrotSmile.png"), pointer;*/
     cursor: pointer;
 
 }
-.btnUnfollow{
+
+.btnUnfollow {
     color: black;
     background: orange;
     cursor: pointer;
+}
+
+.selectedPage {
+    font-weight: bold;
 }

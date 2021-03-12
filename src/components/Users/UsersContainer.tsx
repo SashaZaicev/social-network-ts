@@ -1,13 +1,16 @@
 import React from 'react';
-import s from './Users.module.css'
+// import s from './Users.module.css'
 import {connect} from "react-redux";
 import Users from "./Users";
 import {RootStateType} from "../../redux/store";
-import {followAC, setUserAC, unfollowAC} from "../../redux/usersReducer";
+import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUserAC, unfollowAC} from "../../redux/usersReducer";
 
 let mStp = (state: RootStateType) => {
     return {
-        users: state.usersPage.users
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage
     }
 }
 let mDtp = (dispatch: any) => {
@@ -20,6 +23,12 @@ let mDtp = (dispatch: any) => {
         },
         setUsers: (users: any) => {
             dispatch(setUserAC(users))
+        },
+        setCurrentPage: (page: any) => {
+            dispatch(setCurrentPageAC(page))
+        },
+        setTotalUsersCount: (totalCount: any) => {
+            dispatch(setTotalUsersCountAC(totalCount))
         }
     }
 }
