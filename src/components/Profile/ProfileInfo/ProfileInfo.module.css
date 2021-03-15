@@ -6,4 +6,20 @@
 
 .descriptionBlock {
     padding: 20px;
+    display: flex;
+}
+
+.profileBlock {
+    text-align: center;
+}
+
+.profileInfo {
+    padding: 20px;
+}
+
+.profileInfo li {
+    white-space: break-spaces;
+    font-weight: bold;
+    margin: 10px;
+    list-style-type: none;
 }

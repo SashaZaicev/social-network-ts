@@ -1,7 +1,6 @@
 import './App.css';
 import Header from "./components/header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import Profile from "./components/Profile/Profile";
 import React from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 import Music from './components/Music/Music';
@@ -9,18 +8,9 @@ import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
-// type PropsType = {
-// state:AppStateType
-// store: any
-// dispatch: (action: ActionsTypes) => void
-// }
-
-// const App: React.FC<PropsType> = (props) => {
 const App = () => {
-    // const state = props.store.getState();
-    // let dialogsPages = props.store.getState()dialogsPage
-    // let profilesPages = props.store.profilePage
     let horizontalLine = <div style={{
         height: '10px',
         background: 'linear-gradient(#000000, #ffd700)',
@@ -40,12 +30,8 @@ const App = () => {
                 {verticalLine}
                 <div className="app-wrapper-content">
                     <Route path='/dialogs' render={() => <DialogsContainer
-                        // dispatch={props.dispatch}
-                        // store={state.dialogsPage}
                     />}/>
-                    <Route path='/profile' render={() => <Profile
-                        // dispatch={props.dispatch}
-                        // store = {state.profilePage}
+                    <Route path='/profile/:userId?' render={() => <ProfileContainer
                     />}/>
                     <Route path='/users' render={() => <UsersContainer/>}/>
                     <Route path='/music' render={() => <Music/>}/>
