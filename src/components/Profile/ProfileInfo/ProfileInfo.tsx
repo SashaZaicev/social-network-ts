@@ -1,38 +1,41 @@
 import React from 'react';
-// @ts-ignore
+//@ts-ignore
 import s from "../ProfileInfo/ProfileInfo.module.css";
-// @ts-ignore
+//@ts-ignore
+import photoUser from "../../img/nullPhoto.png"
+//@ts-ignore
 import img1 from "../../img/gold1.jpg";
 import Preloader from "../../../common/Preloader/Preloader";
 import {ProfileInfoType} from "../../../redux/store";
 
-// type ProfilePropsType = {
-//     profile: string
-//     // aboutMe: string
-//     // contacts: {facebook: "facebook.com", website: null, vk: "vk.com/dimych", twitter: "https://twitter.com/@sdf", instagram: "instagra.com/sds", …}
-//     // fullName: "samurai dimych"
-//     // lookingForAJob: true
-//     // lookingForAJobDescription: "не ищу, а дурачусь"
-//     // photos: {small: "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0", large: "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"}
-//     // userId: 2
-// }
+export type ProfilePropsType = {
+    profile: ProfileInfoType
+}
 
-const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
+const ProfileInfo: React.FC<ProfilePropsType> = (props) => {
     if (!props.profile) {
         return <Preloader/>
     }
-    let aboutMe = !props.profile.aboutMe ?
-        'Write a little about yourself' :
-        props.profile.aboutMe
+    let aboutMe = props.profile.aboutMe
+    // ?
+    // 'Write a little about yourself' :
+    // props.profile.aboutMe;
 
-    let accVK = !props.profile.contacts.vk ?
-        'Write here your account vk.com' :
-        props.profile.contacts.vk
+    let accVK = props.profile.contacts.vk
+    // ?
+    // 'Write here your account vk.com' :
+    // props.profile.contacts.vk;
 
-    let accFacebook = !props.profile.contacts.facebook ?
-        'Write here your account facebook.com' :
-        props.profile.contacts.facebook
+    let accFacebook = props.profile.contacts.facebook
+    // ?
+    // 'Write here your account facebook.com' :
+    // props.profile.contacts.facebook;
 
+    //нужно обдумать, как кнопкой менять фото
+
+    let newPhotoUser = props.profile.photos.large
+        ? props.profile.photos.large
+        : photoUser;
 
     return (
         <div>
@@ -40,7 +43,9 @@ const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
             <div className={s.descriptionBlock}>
                 <div className={s.profileBlock}>
                     <div>{props.profile.fullName}</div>
-                    <div><img src={props.profile.photos.large} alt=""/>
+                    <div className={s.profileImage}>
+                        <img src={newPhotoUser} alt=""/>
+
                     </div>
                 </div>
                 <div className={s.profileInfo}>

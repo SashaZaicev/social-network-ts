@@ -1,6 +1,13 @@
 import React, {ChangeEvent} from 'react';
+//@ts-ignore
 import s from './MyPosts.module.css'
 import Post, {PostPropsType} from "./Post/Post";
+
+// export interface PostPropsTypes {
+//     message: string,
+//     likeCount: number,
+//     id: number
+// }
 
 export type PostsPropsType = {
     posts: Array<PostPropsType>
@@ -9,7 +16,8 @@ export type PostsPropsType = {
     addPost: (newPostText: string) => void
 
 }
-
+// {id: 2, message: "Post1", likeCount: 123}
+// Type 'PostPropsType[]' is not assignable to type 'PostType[]'.
 
 const MyPosts: React.FC<PostsPropsType> = (props) => {
         let postsElements = props.posts.map((p) => (<Post

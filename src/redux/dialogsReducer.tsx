@@ -1,4 +1,3 @@
-import {v1} from "uuid";
 import {ActionsTypes, DialogPageType, MessageType} from "./store";
 
 const ADD_MESSAGE = 'ADD-MESSAGE'
@@ -8,37 +7,37 @@ const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 let initialState = {
     dialogs: [
         {
-            id: v1(),
+            id: 6,
             name: 'Dimych'
         },
         {
-            id: v1(),
+            id: 5,
             name: 'Andrey'
         },
         {
-            id: v1(),
+            id: 1,
             name: 'Sveta'
         },
         {
-            id: v1(),
+            id: 2,
             name: 'Sasha'
         },
         {
-            id: v1(),
+            id: 3,
             name: 'Petr'
         }
     ],
     messages: [
         {
-            id: v1(),
+            id: 1,
             message: 'Hello'
         },
         {
-            id: v1(),
+            id: 2,
             message: 'I am fine'
         },
         {
-            id: v1(),
+            id: 3,
             message: 'I am God!'
         }
     ],
@@ -49,7 +48,7 @@ const dialogsReducer = (state: DialogPageType = initialState, action: ActionsTyp
     switch (action.type) {
         case ADD_MESSAGE:{
             let newUserMessage: MessageType = {
-                id: v1(),
+                id: 2,
                 message: action.message,
             }
 

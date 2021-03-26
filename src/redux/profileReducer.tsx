@@ -1,5 +1,6 @@
-import {v1} from "uuid";
-import {ActionsTypes, PostType, ProfilePageType} from "./store";
+import {ActionsTypes, ProfileInfoType, ProfilePageType} from "./store";
+import {profileApi} from "../api/api";
+import {Dispatch} from "redux";
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
@@ -8,35 +9,55 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE'
 let initialState = {
     posts: [
         {
-            id: v1(),
+            id: 2,
             message: 'Post1',
             likeCount: 123
         },
         {
-            id: v1(),
+            id: 3,
             message: 'Post2',
             likeCount: 22
         },
         {
-            id: v1(),
+            id: 4,
             message: 'Post3',
             likeCount: 4
         },
         {
-            id: v1(),
+            id: 5,
             message: 'Post4',
             likeCount: 5
         },
     ],
     newPostText: 'input message',
-    profile: null,
+    profile: {
+        aboutMe: "Write a little about yourself",
+        contacts: {
+            facebook: "Write here your account facebook.com",
+            website: "Write here your account webSite.com",
+            vk: "Write here your account vk.com",
+            twitter: "Write here your account twitter.com",
+            instagram: "Write here your account instagram.com",
+            github: "Write here your account github.com",
+            mainLink: "Write here your account mainLink.com",
+            youtube: "Write here your account youtube.com",
+        },
+        fullName: "Write here your full name",
+        lookingForAJob: true,
+        lookingForAJobDescription: "",
+        photos: {
+            small: "",
+            large: ""
+        },
+        userId: 1
+    }
 };
 
 const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case ADD_POST: {
-            let newPost: PostType = {
-                id: v1(),
+            let newPost = {
+                id: 2,
                 message: action.newPostText,
                 likeCount: 0
             }
@@ -59,13 +80,22 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
             return state
     }
 }
-export const addPostAC = (newPostText: string) => {
+export const addPost = (newPostText: string) => {
     return {type: 'ADD-POST', newPostText: newPostText} as const
 }
-export const onPostChangeAC = (newText: string) => {
+export const updatePostChange = (newText: string) => {
     return {type: "UPDATE-NEW-POST-TEXT", newText: newText} as const
 }
-export const setUserProfile = (profile: any) => {
+export const setUserProfile = (profile: ProfileInfoType) => {
     return {type: "SET_USER_PROFILE", profile} as const
 }
-export default profileReducer;
+
+export const getUserProfile = (userId: number) => {
+    return (dispatch: Dispatch) => {
+        profileApi.authUser(userId).then((response) => {
+            dispatch(setUserProfile(response))
+        })
+    }
+}
+
+export default profileReducer

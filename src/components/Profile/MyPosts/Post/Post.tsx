@@ -1,12 +1,12 @@
 import React from 'react';
+// @ts-ignore
 import s from './Post.module.css'
-
 const imgLogo = 'https://image.freepik.com/free-vector/rabbit-gaming-mascot-e-sports-logo_74154-31.jpg'
 
 export type PostPropsType = {
     message: string,
     likeCount: number,
-    id: string
+    id: number
 }
 
 

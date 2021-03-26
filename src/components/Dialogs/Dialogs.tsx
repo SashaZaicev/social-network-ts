@@ -1,8 +1,10 @@
 import React, {ChangeEvent} from 'react';
+//@ts-ignore
 import s from './Dialogs.module.css'
 import {Message, MessagePropsType} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {DialogPageType} from "../../redux/store";
+import { Redirect } from 'react-router-dom';
 
 
 type DialogsPropsType = {
@@ -11,6 +13,7 @@ type DialogsPropsType = {
     updateNewMessageBody: (body: string) => void
     addMessage: (newMessageBody: string) => void
     newMessageBody: string
+    isAuth: boolean
 }
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {

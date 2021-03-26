@@ -1,5 +1,4 @@
 import './App.css';
-import Header from "./components/header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import React from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
@@ -9,6 +8,8 @@ import Settings from './components/Settings/Settings';
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login";
 
 const App = () => {
     let horizontalLine = <div style={{
@@ -25,7 +26,7 @@ const App = () => {
         <BrowserRouter>
             <div className="app-wrapper">
                 {horizontalLine}
-                <Header/>
+                <HeaderContainer/>
                 <Navbar/>
                 {verticalLine}
                 <div className="app-wrapper-content">
@@ -37,6 +38,7 @@ const App = () => {
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
+                    <Route path='/login' render={() => <Login/>}/>
                 </div>
             </div>
         </BrowserRouter>

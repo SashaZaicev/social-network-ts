@@ -1,8 +1,6 @@
 import React from 'react';
-import {addPostAC, onPostChangeAC} from "../../../redux/profileReducer";
+import {addPost, updatePostChange} from "../../../redux/profileReducer";
 import MyPosts from "./MyPosts";
-// import {AppStateType} from "../../../redux/reduxStore";
-// import {ActionsTypes} from "../../../redux/store";
 import {connect} from "react-redux";
 import {RootStateType} from "../../../redux/store";
 
@@ -38,16 +36,16 @@ let mStp = (state: RootStateType) => {
     }
 }
 
-let mDtp = (dispatch: any) => {
-    return {
-        updatePostChange: (newPostChange: string) => {
-            dispatch(onPostChangeAC(newPostChange))
-        },
-        addPost: (newPostText: string) => {
-            dispatch(addPostAC(newPostText))
-        }
-    }
-}
+// let mDtp = (dispatch: Dispatch) => {
+//     return {
+//         updatePostChange: (newPostChange: string) => {
+//             dispatch(updatePostChange(newPostChange))
+//         },
+//         addPost: (newPostText: string) => {
+//             dispatch(addPost(newPostText))
+//         }
+//     }
+// }
 
-const MyPostsContainer = connect(mStp, mDtp)(MyPosts);
+const MyPostsContainer = connect(mStp, {updatePostChange,addPost})(MyPosts);
 export default MyPostsContainer;
