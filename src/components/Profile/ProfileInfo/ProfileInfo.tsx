@@ -7,9 +7,12 @@ import photoUser from "../../img/nullPhoto.png"
 import img1 from "../../img/gold1.jpg";
 import Preloader from "../../../common/Preloader/Preloader";
 import {ProfileInfoType} from "../../../redux/store";
+import ProfileStatus from "./ProfileStatus";
 
 export type ProfilePropsType = {
     profile: ProfileInfoType
+    status: string
+    updateStatus: (status: string) => void
 }
 
 const ProfileInfo: React.FC<ProfilePropsType> = (props) => {
@@ -22,9 +25,9 @@ const ProfileInfo: React.FC<ProfilePropsType> = (props) => {
     // props.profile.aboutMe;
 
     let accVK = props.profile.contacts.vk
-    // ?
-    // 'Write here your account vk.com' :
-    // props.profile.contacts.vk;
+        ?
+        'Write here your account vk.com' :
+        props.profile.contacts.vk;
 
     let accFacebook = props.profile.contacts.facebook
     // ?
@@ -42,10 +45,11 @@ const ProfileInfo: React.FC<ProfilePropsType> = (props) => {
             <div><img className={s.contentImg} src={img1} alt=""/></div>
             <div className={s.descriptionBlock}>
                 <div className={s.profileBlock}>
-                    <div>{props.profile.fullName}</div>
+                    <div>{props.profile.fullName}
+                        {props.profile.lookingForAJob}</div>
                     <div className={s.profileImage}>
                         <img src={newPhotoUser} alt=""/>
-
+                        <ProfileStatus updateStatus={props.updateStatus} status={props.status}/>
                     </div>
                 </div>
                 <div className={s.profileInfo}>
@@ -55,7 +59,6 @@ const ProfileInfo: React.FC<ProfilePropsType> = (props) => {
                         <li>Facebook: {accFacebook}</li>
                     </ul>
                 </div>
-
 
             </div>
         </div>

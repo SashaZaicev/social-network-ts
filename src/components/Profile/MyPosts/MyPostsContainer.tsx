@@ -1,5 +1,5 @@
 import React from 'react';
-import {addPost, updatePostChange} from "../../../redux/profileReducer";
+import {addPost} from "../../../redux/profileReducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {RootStateType} from "../../../redux/store";
@@ -32,7 +32,7 @@ import {RootStateType} from "../../../redux/store";
 let mStp = (state: RootStateType) => {
     return {
         posts: state.profilePage.posts,
-        newPostText: state.profilePage.newPostText
+        // newPostText: state.profilePage.newPostText
     }
 }
 
@@ -47,5 +47,5 @@ let mStp = (state: RootStateType) => {
 //     }
 // }
 
-const MyPostsContainer = connect(mStp, {updatePostChange,addPost})(MyPosts);
+const MyPostsContainer = connect(mStp, {addPost})(MyPosts);
 export default MyPostsContainer;

@@ -10,6 +10,8 @@ import {
 } from "../../redux/usersReducer";
 import Users from "./Users";
 import Preloader from "../../common/Preloader/Preloader";
+import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
+import {compose} from "redux";
 
 type OwnPropsType = MapStatePropsType & MapDispatchPropsType
 
@@ -32,7 +34,7 @@ type MapDispatchPropsType = {
 }
 export type PropsType = OwnPropsType
 
-class UsersAPIComponent extends React.Component<PropsType> {
+class UsersContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
@@ -71,11 +73,13 @@ let mStp = (state: RootStateType) => {
     }
 }
 
-export default connect(mStp,
-    {
-        follow,
-        unfollow,
-        getUsers,
-        setCurrentPage,
-        toggleFollowingProgress
-    })(UsersAPIComponent);
+export default compose<React.ComponentType>(
+    connect(mStp,
+        {
+            follow,
+            unfollow,
+            getUsers,
+            setCurrentPage,
+            toggleFollowingProgress
+        })
+)(UsersContainer)

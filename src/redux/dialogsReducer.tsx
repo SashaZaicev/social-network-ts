@@ -1,7 +1,7 @@
 import {ActionsTypes, DialogPageType, MessageType} from "./store";
 
 const ADD_MESSAGE = 'ADD-MESSAGE'
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
+// const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 
 
 let initialState = {
@@ -41,7 +41,7 @@ let initialState = {
             message: 'I am God!'
         }
     ],
-    newMessageBody: 'input message'
+    // newMessageBody: 'input message'
 }
 const dialogsReducer = (state: DialogPageType = initialState, action: ActionsTypes) => {
 
@@ -55,13 +55,13 @@ const dialogsReducer = (state: DialogPageType = initialState, action: ActionsTyp
             let newState = {...state}
             newState.messages = [...state.messages]
             newState.messages.push(newUserMessage)
-            newState.newMessageBody = ''
+            // newState.newMessageBody = ''
             return newState;}
-        case UPDATE_NEW_MESSAGE_BODY:{
-            let newState = {...state}
-            newState.newMessageBody = action.newMessage
-            return newState;
-        }
+    //     case UPDATE_NEW_MESSAGE_BODY:{
+    //         let newState = {...state}
+    //         newState.newMessageBody = action.newMessage
+    //         return newState;
+    //     }
         default:
             return state
     }
@@ -70,8 +70,8 @@ const dialogsReducer = (state: DialogPageType = initialState, action: ActionsTyp
 export const addMessageAC = (message: string) => {
     return {type: "ADD-MESSAGE", message: message} as const
 }
-export const updateNewMessageBodyAC = (newMessage: string) => {
-    return {type: "UPDATE-NEW-MESSAGE-BODY", newMessage: newMessage} as const
-}
+// export const updateNewMessageBodyAC = (newMessage: string) => {
+//     return {type: "UPDATE-NEW-MESSAGE-BODY", newMessage: newMessage} as const
+// }
 
 export default dialogsReducer;

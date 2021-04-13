@@ -1,5 +1,4 @@
 import React from 'react';
-// @ts-ignore
 import prealoder from '../../components/img/preloader.svg';
 
 const Preloader = () => {

@@ -36,6 +36,18 @@ export const headerApi = {
             .then(response => {
                 return response.data
             })
+    },
+    login(email: string, password: string, rememberMe = false) {
+        return instance.post(`auth/login`, {email, password, rememberMe})
+            .then(response => {
+                return response.data
+            })
+    },
+    logout() {
+        return instance.delete(`auth/login`)
+            .then(response => {
+                return response.data
+            })
     }
 }
 
@@ -45,5 +57,18 @@ export const profileApi = {
             .then(response => {
                 return response.data
             })
+    },
+    getStatus(userId: number) {
+        return instance.get(`profile/status/` + userId)
+            .then(response => {
+                return response.data
+            })
+    },
+    updateStatus(status: string) {
+        return instance.put(`profile/status`, {status})
+            .then(response => {
+                return response.data
+            })
     }
 }
+

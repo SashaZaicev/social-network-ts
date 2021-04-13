@@ -15,3 +15,15 @@
     grid-area: c;
     background-color: #f6c44f;;
 }
+
+.horizontalLine {
+    height: 10px;
+    background: linear-gradient(#000000, #ffd700);
+    grid-area: q;
+}
+
+.verticalLine {
+    width: 10px;
+    background: linear-gradient(to left, rgb(246 196 79), rgb(255, 215, 0));
+    grid-area: w;
+}

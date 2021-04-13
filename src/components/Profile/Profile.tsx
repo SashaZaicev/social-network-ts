@@ -2,10 +2,11 @@ import React from 'react';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {ProfileInfoType} from "../../redux/store";
-import {Redirect} from "react-router-dom";
 
 export type ProfilePropsType = {
     profile: ProfileInfoType
+    status: string
+    updateStatus: (status: string) => void
 }
 
 
@@ -15,6 +16,8 @@ const Profile: React.FC<ProfilePropsType> = (props) => {
         <div>
             <ProfileInfo {...props}
                          profile={props.profile}
+                         status={props.status}
+                         updateStatus={props.updateStatus}
             />
             <MyPostsContainer/>
         </div>

@@ -6,43 +6,54 @@ import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login";
+import Login from "./components/Login/Login";
+import UsersContainer from "./components/Users/UsersContainer";
+import {connect} from "react-redux";
+import {initializeApp} from "./redux/appReducer";
+import Preloader from "./common/Preloader/Preloader";
 
-const App = () => {
-    let horizontalLine = <div style={{
-        height: '10px',
-        background: 'linear-gradient(#000000, #ffd700)',
-        gridArea: "q",
-    }}></div>
-    let verticalLine = <div style={{
-        width: '10px',
-        background: 'linear-gradient(to left, rgb(246 196 79), rgb(255, 215, 0))',
-        gridArea: "w",
-    }}></div>
-    return (
-        <BrowserRouter>
-            <div className="app-wrapper">
-                {horizontalLine}
-                <HeaderContainer/>
-                <Navbar/>
-                {verticalLine}
-                <div className="app-wrapper-content">
-                    <Route path='/dialogs' render={() => <DialogsContainer
-                    />}/>
-                    <Route path='/profile/:userId?' render={() => <ProfileContainer
-                    />}/>
-                    <Route path='/users' render={() => <UsersContainer/>}/>
-                    <Route path='/music' render={() => <Music/>}/>
-                    <Route path='/news' render={() => <News/>}/>
-                    <Route path='/settings' render={() => <Settings/>}/>
-                    <Route path='/login' render={() => <Login/>}/>
+
+
+class App extends React.Component {
+    componentDidMount() {
+       this.props.initializeApp()
+    }
+
+    render() {
+        let horizontalLine = <div className="horizontalLine"/>
+        let verticalLine = <div className="verticalLine"/>
+        if (!this.props.initialized) {
+            return <Preloader/>
+        }
+
+        return (
+            <BrowserRouter>
+                <div className="app-wrapper">
+                    {horizontalLine}
+                    <HeaderContainer/>
+                    <Navbar/>
+                    {verticalLine}
+                    <div className="app-wrapper-content">
+                        <Route path='/dialogs' render={() => <DialogsContainer
+                        />}/>
+                        <Route path='/profile/:userId?' render={() => <ProfileContainer
+                        />}/>
+                        <Route path='/users' render={() => <UsersContainer/>}/>
+                        <Route path='/music' render={() => <Music/>}/>
+                        <Route path='/news' render={() => <News/>}/>
+                        <Route path='/settings' render={() => <Settings/>}/>
+                        <Route path='/login' render={() => <Login/>}/>
+                    </div>
                 </div>
-            </div>
-        </BrowserRouter>
-    );
+            </BrowserRouter>
+        );
+    }
 }
 
-export default App;
+const mstp = (state: any) => ({
+    initialized: state.app.initialized
+})
+
+export default connect(mstp, {initializeApp})(App);

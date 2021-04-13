@@ -1,5 +1,5 @@
-import {addPost, updatePostChange, setUserProfile} from "./profileReducer";
-import {addMessageAC, updateNewMessageBodyAC} from "./dialogsReducer";
+import {addPost, setUserProfile, setStatus} from "./profileReducer";
+import {addMessageAC} from "./dialogsReducer";
 import {
     setCurrentPage,
     toggleIsFetching,
@@ -8,18 +8,19 @@ import {
     toggleFollowingProgress, acceptUnfollow, acceptFollow,
 } from "./usersReducer";
 import {setAuthUserData} from "./authReducer";
+import { initializedSuccess } from "./appReducer";
 
 export type MessageType = {
     message: string
-    id: number
+    id: any
 }
 export type DialogType = {
     name: string
-    id: number
+    id: any
 }
 
 interface PostType {
-    id: number,
+    id: any,
     message: string,
     likeCount: number
 
@@ -48,12 +49,13 @@ export type ProfileInfoType = {
     lookingForAJob: boolean
     lookingForAJobDescription: string
     photos: PhotosInfoType
-    userId: number
+    userId: any
 }
 export type ProfilePageType = {
-    newPostText: string,
+    // newPostText: string,
     posts: Array<PostType>,
     profile: ProfileInfoType
+    status: string
 }
 
 export type LocationType = {
@@ -62,7 +64,7 @@ export type LocationType = {
 }
 
 export type UsersType = {
-    userId: number
+    userId: any
     followed: boolean,
     fullName: string,
     status: string,
@@ -78,14 +80,14 @@ export type UsersPageType = {
 }
 export type FollowingInProgress = {
     isFetching: boolean,
-    userId: number
+    userId: any
 }
 
 export type SidebarType = {}
 export type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessageBody: string
+    // newMessageBody: string
 }
 export type RootStateType = {
     profilePage: ProfilePageType
@@ -95,8 +97,8 @@ export type RootStateType = {
     auth: AuthUserType
 }
 export type AuthUserType = {
-    id: null,
-    email: null,
+    id: any,
+    email: string,
     login: string,
     isAuth: boolean
 }
@@ -115,18 +117,23 @@ type SetUsersActionType = ReturnType<typeof setUsers>
 type setCurrentPageActionType = ReturnType<typeof setCurrentPage>
 type setTotalUsersCountActionType = ReturnType<typeof setTotalUsersCount>
 type AddPostActionType = ReturnType<typeof addPost>
-type ChangeNewTextActionType = ReturnType<typeof updatePostChange>
+// type ChangeNewTextActionType = ReturnType<typeof updatePostChange>
 type AddMessagesActionType = ReturnType<typeof addMessageAC>
-type updateNewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyAC>
+// type updateNewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyAC>
 type updateToggleIsFetchingActionType = ReturnType<typeof toggleIsFetching>
 type setUserProfileActionType = ReturnType<typeof setUserProfile>
 type setUserDataActionType = ReturnType<typeof setAuthUserData>
 type followingInProgressActionType = ReturnType<typeof toggleFollowingProgress>
+type setStatusActionType = ReturnType<typeof setStatus>
+type initializedSuccessActionType = ReturnType<typeof initializedSuccess>
 export type ActionsTypes =
-    AddPostActionType | ChangeNewTextActionType |
-    AddMessagesActionType | updateNewMessageBodyActionType |
+    AddPostActionType |
+    // ChangeNewTextActionType |
+    AddMessagesActionType |
+    // updateNewMessageBodyActionType |
     FollowActionType | UnfollowActionType |
     SetUsersActionType | setCurrentPageActionType |
     setTotalUsersCountActionType | updateToggleIsFetchingActionType |
-    setUserProfileActionType | setUserDataActionType | followingInProgressActionType
+    setUserProfileActionType | setUserDataActionType | followingInProgressActionType |
+    setStatusActionType | initializedSuccessActionType
 

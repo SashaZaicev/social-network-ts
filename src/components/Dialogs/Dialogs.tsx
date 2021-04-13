@@ -1,10 +1,11 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 //@ts-ignore
 import s from './Dialogs.module.css'
-import {Message, MessagePropsType} from "./Message/Message";
+import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {DialogPageType} from "../../redux/store";
-import { Redirect } from 'react-router-dom';
+import AddMessageForm from "./AddMessageForm/AddMessageForm";
+import {reduxForm} from 'redux-form';
 
 
 type DialogsPropsType = {
@@ -14,6 +15,7 @@ type DialogsPropsType = {
     addMessage: (newMessageBody: string) => void
     newMessageBody: string
     isAuth: boolean
+    addNewMessage: (values: string) => void
 }
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
@@ -28,17 +30,16 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
         name={d.name}
     />)
 
-    let addNewMessage = () => {
-        props.addMessage(props.newMessageBody)
+    let addNewMessage = (values: any) => {
+        props.addMessage(values.newMessageBody)
     }
-    let changeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let body = e.currentTarget.value
-        props.updateNewMessageBody(body);
-    }
+    // let changeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    //     let body = e.currentTarget.value
+    //     props.updateNewMessageBody(body);
+    // }
 
     return (
         <div className={s.dialogs}>
-
             <div className={s.dialogsItems}>
                 {dialogsElements}
             </div>
@@ -48,15 +49,7 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
             <br/>
             <div className={s.textAreaDialogs}>
                 <div>
-                    <textarea
-                        onChange={changeMessage}
-                        placeholder='Enter your message'
-                        value={props.newMessageBody}
-                        name=""
-                        id=""/>
-                </div>
-                <div>
-                    <button onClick={addNewMessage}>Add message</button>
+                    <AddMessageForm onSubmit={addNewMessage}/>
                 </div>
             </div>
 

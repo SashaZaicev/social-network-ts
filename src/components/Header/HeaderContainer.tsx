@@ -1,12 +1,10 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
-//@ts-ignore
-import logo from '../img/carrot.svg';
-//@ts-ignore
-import s from './Header.module.css'
+// import {NavLink} from 'react-router-dom';
+// import logo from '../img/carrot.svg';
+// import s from './Header.module.css'
 import Header from "./Header";
 import {connect} from "react-redux";
-import {getAuthUserData} from "../../redux/authReducer";
+import {getAuthUserData, logout} from "../../redux/authReducer";
 import {RootStateType} from "../../redux/store";
 
 type OwnPropsType = MapStatePropsType & MapDispatchPropsType
@@ -21,15 +19,6 @@ type MapDispatchPropsType = {
 type PropsType = OwnPropsType
 
 class HeaderContainer extends React.Component<PropsType> {
-    componentDidMount() {
-        this.props.getAuthUserData()
-        // headerApi.authMe().then(response => {
-        //         if (response.resultCode === 0) {
-        //             let {id, login, email} = response.data;
-        //             this.props.setAuthUserData(id, login, email)
-        //         }
-        //     })
-    }
 
     render() {
         return (
@@ -43,4 +32,4 @@ const mstp = (state: RootStateType): MapStatePropsType => ({
     login: state.auth.login
 })
 
-export default connect(mstp, {getAuthUserData})(HeaderContainer);
+export default connect(mstp, {getAuthUserData, logout})(HeaderContainer);
