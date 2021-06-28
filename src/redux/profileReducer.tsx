@@ -6,6 +6,7 @@ const ADD_POST = 'ADD-POST'
 // const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = "SET_STATUS"
+const DELETE_POST = "DELETE_POST"
 // const UPDATE_STATUS = "UPDATE_STATUS"
 
 let initialState = {
@@ -84,6 +85,9 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile};
         }
+        case DELETE_POST: {
+            return {...state, posts: state.posts.filter(p => p.id != action.postId)};
+        }
         default:
             return state
     }
@@ -97,6 +101,9 @@ export const setUserProfile = (profile: ProfileInfoType) => {
 export const setStatus = (status: string) => {
     return {type: "SET_STATUS", status} as const
 }
+export const deletePost = (postId: string) => {
+    return {type: "DELETE_POST", postId} as const
+}
 export const getUserProfile = (userId: number) => {
     return (dispatch: Dispatch) => {
         profileApi.authUser(userId).then((response) => {
@@ -104,20 +111,14 @@ export const getUserProfile = (userId: number) => {
         })
     }
 }
-export const getStatus = (userId: number) => {
-    return (dispatch: Dispatch) => {
-        profileApi.getStatus(userId).then((response) => {
-            dispatch(setStatus(response))
-        })
-    }
+export const getStatus = (userId: number) => async (dispatch: Dispatch) => {
+    const response = await profileApi.getStatus(userId)
+    dispatch(setStatus(response))
 }
-export const updateStatus = (status: string) => {
-    return (dispatch: Dispatch) => {
-        profileApi.updateStatus(status).then((response) => {
-            if (response.data.resultCode === 0) {
-                dispatch(setStatus(status))
-            }
-        })
+export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
+    const response = await profileApi.updateStatus(status)
+    if (response.data.resultCode === 0) {
+        dispatch(setStatus(status))
     }
 }
 

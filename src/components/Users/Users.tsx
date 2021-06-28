@@ -1,81 +1,54 @@
 import React from 'react';
-// @ts-ignore
-import st from './Users.module.css';
-// @ts-ignore
-import userPhoto from '../img/monkey.png';
-import {NavLink} from 'react-router-dom';
 import {FollowingInProgress, UsersPageType} from "../../redux/store";
+import User from "./User";
+import Pagination from "../../common/Pagination/Pagination";
 
 type UsersPropsType = {
     users: UsersPageType,
     pageSize: number,
-    totalUsersCount: number,
+    totalItemsCount: number,
     currentPage: number,
-    onPageChanged: (pageNumber:number) => void
+    onPageChanged: (pageNumber: number) => void
     followingInProgress: Array<FollowingInProgress>
     follow: (userId: number) => void,
     unfollow: (userId: number) => void,
 }
 
-const Users: React.FC<UsersPropsType> = (props) => {
-    let pagesCount = Math.ceil(props.totalUsersCount
-        / props.pageSize);
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
+const Users: React.FC<UsersPropsType> = ({
+                                             users, totalItemsCount,
+                                             pageSize, onPageChanged, currentPage, ...props
+                                         }) => {
     return (
         <div>
-            <div>
-                {pages.map((p) => {
-                    return <span
-                        key={p + 1}
-                        className={props.currentPage === p && st.selectedPage}
-                        onClick={(e) => {
-                            props.onPageChanged(p)
-                        }}>
-                            {p} </span>
-                })}
-
+            <div style={{
+                fontSize: "xxx-large",
+                display: "flex",
+                justifyContent: "center",
+                color: "orange",
+                textShadow: "black 0 0 2px"
+            }}>USERS
             </div>
-            {props.users.map((u:any) => <div key={u.id}>
-                <span>
-                    <div>
-                        <NavLink to={'/profile/' + u.id}>
-                        <img
-                            style={{
-                                width: '100px',
-                                height: '100px',
-                            }}
-                            src={u.photos.small != null ? u.photos.small
-                                : userPhoto} alt=""/>
-                                </NavLink>
-                        </div>
-                    <div>
-                        {
-                            u.followed
-                                ? <button disabled={props.followingInProgress.some((id) => id === u.id)}
-                                          className={st.btnFollow} onClick={() => {
-                                    props.unfollow(u.id)
-                                }}>Unfollow</button>
-                                :
-                                <button disabled={props.followingInProgress.some((id) => id === u.id)}
-                                        className={st.btnUnfollow} onClick={() => {
-                                    props.follow(u.id)
-                                }}>Follow</button>
-                        }
-                            </div>
-                            </span>
-                    <span>
-                            <div>{u.name}</div>
-                            <div>{u.status}</div>
-                            </span>
-                    <span>
-                            <div>{'u.location.country'}</div>
-                            <div>{'u.location.city'}</div>
-                            </span>
-                </div>
+            {/*<Paginator currentPage={currentPage} onPageChanged={onPageChanged} pageSize={pageSize}*/}
+            {/*           totalUsersCount={totalUsersCount}/>*/}
+            <Pagination page={currentPage} pageCount={pageSize}
+                        productTotalCount={totalItemsCount} getPage={onPageChanged}/>
+            {/*<div>*/}
+            {/*    {pages.map((p) => {*/}
+            {/*        return <span*/}
+            {/*            key={p + 1}*/}
+            {/*            className={currentPage === p && styles.selectedPage}*/}
+            {/*            onClick={(e) => {*/}
+            {/*                onPageChanged(p)*/}
+            {/*            }}>*/}
+            {/*                {p} </span>*/}
+            {/*    })}*/}
+            {/*</div>*/}
+            <div> {users.map((u: any) =>
+                <User key={u.id} user={u}
+                      followingInProgress={props.followingInProgress}
+                      follow={props.follow} unfollow={props.unfollow}/>
             )}
+            </div>
         </div>
     );
 };

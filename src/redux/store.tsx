@@ -1,4 +1,4 @@
-import {addPost, setUserProfile, setStatus} from "./profileReducer";
+import {addPost, setUserProfile, setStatus, deletePost} from "./profileReducer";
 import {addMessageAC} from "./dialogsReducer";
 import {
     setCurrentPage,
@@ -26,6 +26,9 @@ interface PostType {
 
 }
 
+export type AppType = {
+    initialized: boolean
+}
 interface PhotosInfoType {
     small: string;
     large: string
@@ -117,6 +120,7 @@ type SetUsersActionType = ReturnType<typeof setUsers>
 type setCurrentPageActionType = ReturnType<typeof setCurrentPage>
 type setTotalUsersCountActionType = ReturnType<typeof setTotalUsersCount>
 type AddPostActionType = ReturnType<typeof addPost>
+type DeletePostActionType = ReturnType<typeof deletePost>
 // type ChangeNewTextActionType = ReturnType<typeof updatePostChange>
 type AddMessagesActionType = ReturnType<typeof addMessageAC>
 // type updateNewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyAC>
@@ -135,5 +139,5 @@ export type ActionsTypes =
     SetUsersActionType | setCurrentPageActionType |
     setTotalUsersCountActionType | updateToggleIsFetchingActionType |
     setUserProfileActionType | setUserDataActionType | followingInProgressActionType |
-    setStatusActionType | initializedSuccessActionType
+    setStatusActionType | initializedSuccessActionType | DeletePostActionType
 

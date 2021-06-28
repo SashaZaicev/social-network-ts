@@ -4,9 +4,9 @@ import axios from "axios";
 const instance = axios.create({
     withCredentials: true,
     headers: {
-        "API-KEY": "b8f7d5e1-77fe-4269-97b3-181c5d205c51"
+        "API-KEY": "39f6779d-eaae-4bd7-8915-a34646e60614"
     },
-    baseURL: 'https://social-network.samuraijs.com/api/1.0/'
+    baseURL: 'https://social-network.samuraijs.com/api/1.0'
 })
 
 export const usersApi = {
@@ -37,8 +37,8 @@ export const headerApi = {
                 return response.data
             })
     },
-    login(email: string, password: string, rememberMe = false) {
-        return instance.post(`auth/login`, {email, password, rememberMe})
+    login(email: string, password: string, rememberMe = false,captcha= false) {
+        return instance.post(`auth/login`, {email, password, rememberMe,captcha})
             .then(response => {
                 return response.data
             })

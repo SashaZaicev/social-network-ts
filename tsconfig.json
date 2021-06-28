@@ -16,12 +16,12 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
-//    "isolatedModules": true,
+    "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx"
   },
   "include": [
-    "src/**/*.ts", "tests/**/*.ts"
+    "src/**/*.ts",
+    "tests/**/*.ts"
   ]
 }

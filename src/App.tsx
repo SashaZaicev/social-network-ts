@@ -1,7 +1,7 @@
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import React from 'react';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter, Route, withRouter} from 'react-router-dom';
 import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
@@ -10,50 +10,57 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import UsersContainer from "./components/Users/UsersContainer";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {initializeApp} from "./redux/appReducer";
-import Preloader from "./common/Preloader/Preloader";
+import store, {AppStateType} from "./redux/reduxStore";
+import {compose} from "redux";
 
 
-
-class App extends React.Component {
+class App extends React.Component<AppStateType> {
     componentDidMount() {
-       this.props.initializeApp()
+        initializeApp()
     }
 
     render() {
         let horizontalLine = <div className="horizontalLine"/>
         let verticalLine = <div className="verticalLine"/>
-        if (!this.props.initialized) {
-            return <Preloader/>
-        }
+        // if (!this.props.initialized) {
+        //     return <Preloader/>
+        // }
 
         return (
-            <BrowserRouter>
-                <div className="app-wrapper">
-                    {horizontalLine}
-                    <HeaderContainer/>
-                    <Navbar/>
-                    {verticalLine}
-                    <div className="app-wrapper-content">
-                        <Route path='/dialogs' render={() => <DialogsContainer
-                        />}/>
-                        <Route path='/profile/:userId?' render={() => <ProfileContainer
-                        />}/>
-                        <Route path='/users' render={() => <UsersContainer/>}/>
-                        <Route path='/music' render={() => <Music/>}/>
-                        <Route path='/news' render={() => <News/>}/>
-                        <Route path='/settings' render={() => <Settings/>}/>
-                        <Route path='/login' render={() => <Login/>}/>
-                    </div>
+            <div className="app-wrapper">
+                {horizontalLine}
+                <HeaderContainer/>
+                <Navbar/>
+                {verticalLine}
+                <div className="app-wrapper-content">
+                    <Route path='/dialogs' render={() => <DialogsContainer
+                    />}/>
+                    <Route path='/profile/:userId?' render={() => <ProfileContainer
+                    />}/>
+                    <Route path='/users' render={() => <UsersContainer/>}/>
+                    <Route path='/music' render={() => <Music/>}/>
+                    <Route path='/news' render={() => <News/>}/>
+                    <Route path='/settings' render={() => <Settings/>}/>
+                    <Route path='/login' render={() => <Login/>}/>
                 </div>
-            </BrowserRouter>
+            </div>
         );
     }
 }
 
-const mstp = (state: any) => ({
+const mstp = (state: AppStateType) => ({
     initialized: state.app.initialized
 })
 
-export default connect(mstp, {initializeApp})(App);
+let AppContainer = compose(withRouter, connect(mstp, {initializeApp}))(App);
+
+const JSApp = (props:any) => {
+    return (<BrowserRouter>
+        <Provider store={store}>
+            <AppContainer/>
+        </Provider>
+    </BrowserRouter>)
+}
+export default JSApp;

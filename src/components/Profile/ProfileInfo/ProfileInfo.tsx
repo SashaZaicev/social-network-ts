@@ -7,7 +7,7 @@ import photoUser from "../../img/nullPhoto.png"
 import img1 from "../../img/gold1.jpg";
 import Preloader from "../../../common/Preloader/Preloader";
 import {ProfileInfoType} from "../../../redux/store";
-import ProfileStatus from "./ProfileStatus";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 export type ProfilePropsType = {
     profile: ProfileInfoType
@@ -15,29 +15,29 @@ export type ProfilePropsType = {
     updateStatus: (status: string) => void
 }
 
-const ProfileInfo: React.FC<ProfilePropsType> = (props) => {
-    if (!props.profile) {
+const ProfileInfo: React.FC<ProfilePropsType> = ({profile, updateStatus, status}) => {
+    if (!profile) {
         return <Preloader/>
     }
-    let aboutMe = props.profile.aboutMe
+    let aboutMe = profile.aboutMe
     // ?
     // 'Write a little about yourself' :
     // props.profile.aboutMe;
 
-    let accVK = props.profile.contacts.vk
+    let accVK = profile.contacts.vk
         ?
         'Write here your account vk.com' :
-        props.profile.contacts.vk;
+        profile.contacts.vk;
 
-    let accFacebook = props.profile.contacts.facebook
+    let accFacebook = profile.contacts.facebook
     // ?
     // 'Write here your account facebook.com' :
     // props.profile.contacts.facebook;
 
     //нужно обдумать, как кнопкой менять фото
 
-    let newPhotoUser = props.profile.photos.large
-        ? props.profile.photos.large
+    let newPhotoUser = profile.photos.large
+        ? profile.photos.large
         : photoUser;
 
     return (
@@ -45,11 +45,12 @@ const ProfileInfo: React.FC<ProfilePropsType> = (props) => {
             <div><img className={s.contentImg} src={img1} alt=""/></div>
             <div className={s.descriptionBlock}>
                 <div className={s.profileBlock}>
-                    <div>{props.profile.fullName}
-                        {props.profile.lookingForAJob}</div>
+                    <div>{profile.fullName}
+                        {profile.lookingForAJob}</div>
                     <div className={s.profileImage}>
                         <img src={newPhotoUser} alt=""/>
-                        <ProfileStatus updateStatus={props.updateStatus} status={props.status}/>
+                        {/*<ProfileStatus updateStatus={props.updateStatus} status={props.status}/>*/}
+                        <ProfileStatusWithHooks updateStatus={updateStatus} status={status}/>
                     </div>
                 </div>
                 <div className={s.profileInfo}>
