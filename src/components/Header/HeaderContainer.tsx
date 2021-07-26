@@ -4,14 +4,14 @@ import React from 'react';
 // import s from './Header.module.css'
 import Header from "./Header";
 import {connect} from "react-redux";
-import {getAuthUserData, logout} from "../../redux/authReducer";
-import {RootStateType} from "../../redux/store";
+import {getAuthUserData, logout} from "../../redux/reducers/authReducer";
+import {AppStateType} from "../../redux/reduxStore";
 
 type OwnPropsType = MapStatePropsType & MapDispatchPropsType
 
 type MapStatePropsType = {
-    isAuth: boolean
-    login: string
+    isAuth: boolean,
+    login: string,
 }
 type MapDispatchPropsType = {
     getAuthUserData: () => void,
@@ -27,7 +27,7 @@ class HeaderContainer extends React.Component<PropsType> {
     }
 }
 
-const mstp = (state: RootStateType): MapStatePropsType => ({
+const mstp = (state: AppStateType): MapStatePropsType => ({
     isAuth: state.auth.isAuth,
     login: state.auth.login
 })

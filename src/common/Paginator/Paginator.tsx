@@ -1,8 +1,6 @@
 import React from 'react';
-// @ts-ignore
 import styles from './Paginator.module.css';
-// @ts-ignore
-import userPhoto from '../../components/img/monkey.png';
+// let styles = require('./Paginator.module.css');
 
 type PaginatorPropsType = {
     pageSize: number,

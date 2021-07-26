@@ -5,3 +5,18 @@
 .postBlock {
     padding: 10px;
 }
+
+.btnStyle {
+    color: black;
+    background: orange;
+    cursor: pointer;
+}
+
+.titleStyle {
+    display: flex;
+    font-size: xxx-large;
+    justify-content: center;
+    color: orange;
+    text-shadow: black 0 0 2px;
+    grid-area: header
+}

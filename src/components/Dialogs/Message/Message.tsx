@@ -1,11 +1,14 @@
-import s from "../Dialogs.module.css";
-import React from "react";
+import style from "../Dialogs.module.css";
+import React, {FC} from "react";
 
-export type MessagePropsType = {
-    message: string
-    id:string
+type MessagePropsType = {
+  message: string
 }
-export const Message:React.FC<MessagePropsType> = (props) => {
-    return (
-        <div className={s.message}>{props.message}</div>)
+export const Message: FC<MessagePropsType> = ({
+                                                message,
+                                              }) => {
+  return (
+    <div className={style.message}>
+      {message}
+    </div>)
 }

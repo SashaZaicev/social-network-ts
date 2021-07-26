@@ -1,13 +1,10 @@
-import React from 'react';
-import prealoder from '../../components/img/preloader.svg';
+import preloader from '../../components/img/preloader.svg';
 
-const Preloader = () => {
-    return (
-        <div>
-            <img src={prealoder}
-                 alt="preloader"/>
-        </div>
-    )
+export const Preloader = () => {
+  return (
+    <div>
+      <img src={preloader}
+           alt="preloader"/>
+    </div>
+  )
 };
-
-export default Preloader;

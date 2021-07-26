@@ -2,6 +2,8 @@ import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {Field, reduxForm} from "redux-form";
 import {Textarea} from "../../../common/FormsControls/FormsControls";
 import React from "react";
+//@ts-ignore
+import style from '../Dialogs.module.css'
 
 const maxLength100 = maxLengthCreator(100)
 
@@ -12,7 +14,7 @@ const AddMessageForm = (props: any) => {
                         placeholder={'Enter your message'}/>
             </div>
             <div>
-                <button>Add message</button>
+                <button className={style.btnStyle}>Add message</button>
             </div>
         </form>)
 }

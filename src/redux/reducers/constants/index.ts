@@ -1,0 +1,24 @@
+//appReducer
+export const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS'
+//authReducer
+export const SET_USER_DATA = 'SET_USER_DATA'
+export const GET_CAPTCHA_URL_SUCCESS = 'GET_CAPTCHA_URL_SUCCESS'
+//dialogsReducer
+export const ADD_MESSAGE = 'ADD-MESSAGE'
+export const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
+//profileReducer
+export const ADD_POST = 'ADD-POST'
+export const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+export const SET_USER_PROFILE = 'SET_USER_PROFILE'
+export const SET_STATUS = "SET_STATUS"
+export const DELETE_POST = "DELETE_POST"
+export const SAVE_PHOTO = "SAVE_PHOTO"
+export const UPDATE_STATUS = "UPDATE_STATUS"
+//usersReducer
+export const FOLLOW = 'FOLLOW'
+export const UNFOLLOW = 'UNFOLLOW'
+export const SET_USERS = 'SET_USERS'
+export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+export const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
+export const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+export const FOLLOWING_IN_PROGRESS = 'FOLLOWING_IN_PROGRESS'

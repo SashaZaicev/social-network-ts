@@ -1,0 +1,8 @@
+.titleStyle {
+    display: flex;
+    font-size: xxx-large;
+    justify-content: center;
+    color: orange;
+    text-shadow: black 0 0 2px;
+    grid-area: header
+}

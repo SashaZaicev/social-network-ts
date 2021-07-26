@@ -3,7 +3,8 @@
     grid-template-areas:
             "h h h"
             "q q q"
-            "n w c";
+            "n w c"
+            "b b b";
     grid-template-rows: 60px 1fr;
     grid-template-columns: 2fr 10px 10fr;
     width: 1200px;
@@ -20,6 +21,12 @@
     height: 10px;
     background: linear-gradient(#000000, #ffd700);
     grid-area: q;
+}
+
+.bottomHorizontalLine {
+    height: 10px;
+    background: linear-gradient(#ffd700, #000000);
+    grid-area: b;
 }
 
 .verticalLine {

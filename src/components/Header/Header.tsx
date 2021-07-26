@@ -7,13 +7,15 @@ import s from './Header.module.css'
 
 const Header = (props: any) => {
     return (
-        <header className={s.header}>
+        <header className={`${s.header}`}>
             <img src={logo} alt="logo"/>
 
-            <div className={s.loginBlock}>
+            <div className={`${s.loginBlock} ${s.btnStylePosition}`}>
                 {props.isAuth
-                    ? <div>{props.login} - <button onClick={props.logout}>Log out</button></div>
-                    : <NavLink to={'/login'}>Login</NavLink>}
+                    ? <div>{props.login} - <button className={s.btnStyle}
+                                                   onClick={props.logout}>Log out</button></div>
+                    : <button className={`${s.btnStyle} ${s.btnStylePosition}`}><NavLink to={'/login'}>Login</NavLink>
+                    </button>}
             </div>
         </header>)
 }

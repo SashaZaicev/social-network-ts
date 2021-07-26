@@ -1,5 +1,5 @@
 import profileReducer, {addPost, deletePost} from "./profileReducer";
-import {ProfilePageType} from "./store";
+import {ProfilePageType} from "../store";
 let state = {
     posts: [
         {
@@ -23,7 +23,6 @@ let state = {
             likeCount: 5
         },
     ],
-    // newPostText: 'input message',
     profile: {
         aboutMe: "Write a little about yourself",
         contacts: {
@@ -43,7 +42,7 @@ let state = {
             small: "",
             large: ""
         },
-        userId: 1
+        userId: '1'
     },
     status: ""
 };

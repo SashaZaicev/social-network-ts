@@ -1,12 +1,40 @@
 .formControl.error textarea,
-.formControl.error input{
+.formControl.error input {
     border: solid red 2px;
 }
+
 .formControl.error span {
     color: darkred;
 }
+
 .formSummaryError {
     border: red 1px solid;
     padding: 5px;
     color: rosybrown;
+}
+
+.btnStyle {
+    color: black;
+    background: orange;
+    cursor: pointer;
+    margin-bottom: 15px;
+    margin-left: 15px;
+}
+.checkboxContainer {
+    width: 25px;
+    height: 25px;
+    background-size: 100%;
+    /*background-image: url("./src/components/img/sad.svg");*/
+}
+h1 {
+    font-size: xxx-large;
+    display: flex;
+    justify-content: center;
+    color: orange;
+    text-shadow: black 0px 0px 2px;
+}
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

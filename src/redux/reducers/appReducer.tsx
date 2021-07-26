@@ -1,16 +1,13 @@
-// import {v1} from "uuid";
-import {ActionsTypes, AppType} from "./store";
+import {ActionsTypes, AppType} from "../store";
 import {getAuthUserData} from "./authReducer";
-import {AppThunk} from "./reduxStore";
-
-const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS'
+import {AppThunk} from "../reduxStore";
+import {INITIALIZED_SUCCESS} from "./constants";
 
 let initialState = {
     initialized: false,
-
 };
 
-const appReducer = (state:AppType = initialState, action: ActionsTypes) => {
+export const appReducer = (state = initialState, action: ActionsTypes): AppType => {
     switch (action.type) {
         case INITIALIZED_SUCCESS:
             return {
@@ -21,17 +18,17 @@ const appReducer = (state:AppType = initialState, action: ActionsTypes) => {
             return state
     }
 }
-export const initializedSuccess = () => {
+type InitializedSuccessActionType = {
+    type: typeof INITIALIZED_SUCCESS
+}
+export const initializedSuccess = (): InitializedSuccessActionType => {
     return ({type: INITIALIZED_SUCCESS}) as const
 }
 
-export const initializeApp = ():AppThunk => (dispatch) => {
+export const initializeApp = (): AppThunk => (dispatch) => {
     let promise = dispatch(getAuthUserData())
     Promise.all([promise])
         .then(() => {
             dispatch(initializedSuccess())
         })
-
-
-}
-export default appReducer;
+};

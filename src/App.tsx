@@ -1,66 +1,65 @@
 import './App.css';
-import Navbar from "./components/Navbar/Navbar";
+import {Navbar} from "./components/Navbar/Navbar";
 import React from 'react';
-import {BrowserRouter, Route, withRouter} from 'react-router-dom';
-import Music from './components/Music/Music';
-import News from './components/News/News';
-import Settings from './components/Settings/Settings';
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
+import { Route, Switch, Redirect} from 'react-router-dom';
+import {Music} from './components/Music/Music';
+import {News} from './components/News/News';
+import {Settings} from './components/Settings/Settings';
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import UsersContainer from "./components/Users/UsersContainer";
-import {connect, Provider} from "react-redux";
-import {initializeApp} from "./redux/appReducer";
-import store, {AppStateType} from "./redux/reduxStore";
-import {compose} from "redux";
+import WithSuspense from "./hoc/WithSuspense";
 
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 
-class App extends React.Component<AppStateType> {
-    componentDidMount() {
-        initializeApp()
-    }
+export const PATH = {
+    DIALOGS: '/dialogs',
+    ERROR_404: '/404',
+    LOGIN: '/login',
+    PROFILE: '/profile/:userId?',
+    USERS: '/users',
+    MUSIC: '/music',
+    NEWS: '/news',
+    SETTINGS: '/settings'
+}
 
-    render() {
-        let horizontalLine = <div className="horizontalLine"/>
-        let verticalLine = <div className="verticalLine"/>
-        // if (!this.props.initialized) {
-        //     return <Preloader/>
-        // }
+const App = () => {
 
-        return (
-            <div className="app-wrapper">
-                {horizontalLine}
-                <HeaderContainer/>
-                <Navbar/>
-                {verticalLine}
-                <div className="app-wrapper-content">
-                    <Route path='/dialogs' render={() => <DialogsContainer
-                    />}/>
-                    <Route path='/profile/:userId?' render={() => <ProfileContainer
-                    />}/>
-                    <Route path='/users' render={() => <UsersContainer/>}/>
-                    <Route path='/music' render={() => <Music/>}/>
-                    <Route path='/news' render={() => <News/>}/>
-                    <Route path='/settings' render={() => <Settings/>}/>
-                    <Route path='/login' render={() => <Login/>}/>
-                </div>
+    let horizontalLine = <div className="horizontalLine"/>
+    let bottomHorizontalLine = <div className="bottomHorizontalLine"/>
+    let verticalLine = <div className="verticalLine"/>
+
+    return (
+        <div className="app-wrapper">
+            {horizontalLine}
+            <HeaderContainer/>
+            <Navbar/>
+            {verticalLine}
+            <div className="app-wrapper-content">
+                <Switch>
+                    <Route exact path='/' render={
+                        () => <Redirect to={PATH.PROFILE}/>
+                    }/>
+                    <Route path={PATH.DIALOGS} render={
+                        WithSuspense(DialogsContainer)
+                    }/>
+                    <Route path={PATH.PROFILE} render={
+                        WithSuspense(ProfileContainer)
+                    }/>
+                    <Route path={PATH.USERS} render={() => <UsersContainer />}/>
+                    <Route path={PATH.MUSIC} render={() => <Music/>}/>
+                    <Route path={PATH.NEWS} render={() => <News/>}/>
+                    <Route path={PATH.SETTINGS} render={() => <Settings/>}/>
+                    <Route path={PATH.LOGIN} render={() => <Login/>}/>
+                    <Route path={PATH.ERROR_404} render={
+                        () => <Redirect from={'*'} to={PATH.ERROR_404}/>
+                    }/>
+                </Switch>
             </div>
-        );
-    }
+            {bottomHorizontalLine}
+        </div>
+    );
 }
+export default App;
 
-const mstp = (state: AppStateType) => ({
-    initialized: state.app.initialized
-})
-
-let AppContainer = compose(withRouter, connect(mstp, {initializeApp}))(App);
-
-const JSApp = (props:any) => {
-    return (<BrowserRouter>
-        <Provider store={store}>
-            <AppContainer/>
-        </Provider>
-    </BrowserRouter>)
-}
-export default JSApp;

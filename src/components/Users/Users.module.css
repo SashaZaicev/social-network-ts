@@ -1,9 +1,7 @@
 .btnFollow {
     color: orange;
     background: black;
-    /*cursor: url("./src/components/img/carrotSmile.png"), pointer;*/
     cursor: pointer;
-
 }
 
 .btnUnfollow {
@@ -11,4 +9,11 @@
     background: orange;
     cursor: pointer;
 }
-
+.titleStyle {
+    display: flex;
+    font-size: xxx-large;
+    justify-content: center;
+    color: orange;
+    text-shadow: black 0 0 2px;
+    grid-area: header
+}

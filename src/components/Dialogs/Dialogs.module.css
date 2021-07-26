@@ -1,19 +1,26 @@
 .dialogs {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-rows: 2fr;
+    /*grid-template-columns: 1fr 2fr;*/
+    /*grid-template-rows: 2fr;*/
+    grid-template-areas:
+        "header header"
+        "contacts messages"
+        "footer footer";
 }
 
 .dialogsItems {
     padding: 10px;
+    grid-area: contacts;
 }
 
 .messages {
     padding: 10px;
+    grid-area: messages;
 }
 
 .textAreaDialogs {
     grid-row-start: 2;
+    grid-area: footer;
 }
 
 .dialog a {
@@ -24,4 +31,19 @@
 .dialogsItems a.active {
     font-weight: 500;
     color: darkgoldenrod;
+}
+
+.btnStyle {
+    color: black;
+    background: orange;
+    cursor: pointer;
+}
+
+.dialogsTitle {
+    display: flex;
+    font-size: xxx-large;
+    justify-content: center;
+    color: orange;
+    text-shadow: black 0 0 2px;
+    grid-area: header
 }

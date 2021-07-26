@@ -1,4 +1,3 @@
-
 .nav {
     grid-area: n;
     background-color: gold;
@@ -14,8 +13,8 @@
     font-weight: 500;
     color: darkgoldenrod;
 }
+
 a.navLink:hover {
     cursor: pointer;
-    /*cursor: url('./src/components/img/carrot.png'),pointer;*/
     color: #B8860B;
 }
