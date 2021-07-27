@@ -11,7 +11,7 @@ export type ProfilePropsType = {
   status: string
   updateStatus: (status: string) => void
   isOwner: boolean
-  savePhoto: (photo: string) => void
+  savePhoto: (photo: File) => void
 }
 
 export const ProfileInfo: FC<ProfilePropsType> = ({
@@ -44,8 +44,7 @@ export const ProfileInfo: FC<ProfilePropsType> = ({
   let newPhotoUser = profile.photos.large
     ? profile.photos.large
     : photoUser;
-  const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement> | any) => {
-    debugger
+  const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       savePhoto(e.target.files[0])
     }

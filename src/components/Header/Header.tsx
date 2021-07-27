@@ -1,22 +1,34 @@
-import React from 'react';
+import {FC} from 'react';
 import {NavLink} from 'react-router-dom';
-//@ts-ignore
 import logo from '../img/carrot.svg';
-//@ts-ignore
-import s from './Header.module.css'
+import style from './Header.module.css'
 
-const Header = (props: any) => {
-    return (
-        <header className={`${s.header}`}>
-            <img src={logo} alt="logo"/>
-
-            <div className={`${s.loginBlock} ${s.btnStylePosition}`}>
-                {props.isAuth
-                    ? <div>{props.login} - <button className={s.btnStyle}
-                                                   onClick={props.logout}>Log out</button></div>
-                    : <button className={`${s.btnStyle} ${s.btnStylePosition}`}><NavLink to={'/login'}>Login</NavLink>
-                    </button>}
-            </div>
-        </header>)
+type HeaderPropsType = {
+  isAuth: boolean,
+  login: string,
+  getAuthUserData: () => void,
+  logout: () => void,
 }
-export default Header;
+
+export const Header: FC<HeaderPropsType> = ({
+                                              isAuth,
+                                              login,
+                                              logout
+                                            }) => {
+  return (
+    <header className={`${style.header}`}>
+      <img src={logo} alt="logo"/>
+      <div className={`${style.loginBlock} ${style.btnStylePosition}`}>
+        {isAuth
+          ? <div>{login} -
+            <button className={style.btnStyle}
+                    onClick={logout}>
+              Log out
+            </button>
+          </div>
+          : <button className={`${style.btnStyle} ${style.btnStylePosition}`}>
+            <NavLink to={'/login'}>Login</NavLink>
+          </button>}
+      </div>
+    </header>)
+};

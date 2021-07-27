@@ -30,8 +30,7 @@ export class ProfileStatus extends React.Component<OwnPropsType> {
     this.setState({status: e.currentTarget.value})
   };
 
-  componentDidUpdate(prevProps: any, prevState: any) {
-    debugger
+  componentDidUpdate(prevProps: OwnPropsType) {
     if (prevProps.status !== this.props.status) {
       this.setState({
         status: this.props.status

@@ -26,7 +26,7 @@ type MapDispatchPropsType = {
   getUserProfile: (userId: string) => void
   getStatus: (userId: string) => void
   updateStatus: (status: string) => void
-  savePhoto: (photo: string) => void
+  savePhoto: (photo: File) => void
 }
 type OwnPropsType = MapStatePropsType & MapDispatchPropsType
 type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
@@ -48,7 +48,7 @@ class ProfileContainer extends React.Component<PropsType> {
     this.refreshProfile()
   }
 
-  componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
+  componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: string) {
     if (this.props.match.params.userId !== prevProps.match.params.userId) {
       this.refreshProfile()
     }
@@ -69,7 +69,8 @@ class ProfileContainer extends React.Component<PropsType> {
   }
 }
 
-let mstp = (state: any):MapStatePropsType => ({
+//AppStateType
+let mstp = (state: AppStateType): MapStatePropsType => ({
   profile: state.profilePage.profile,
   status: state.profilePage.status,
   authorizedUserId: state.auth.id,

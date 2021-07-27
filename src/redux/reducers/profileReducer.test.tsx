@@ -1,24 +1,23 @@
 import profileReducer, {addPost, deletePost} from "./profileReducer";
-import {ProfilePageType} from "../store";
 let state = {
     posts: [
         {
-            id: 2,
+            id: '2',
             message: 'Post1',
             likeCount: 123
         },
         {
-            id: 3,
+            id: '3',
             message: 'Post2',
             likeCount: 22
         },
         {
-            id: 4,
+            id: '4',
             message: 'Post3',
             likeCount: 4
         },
         {
-            id: 5,
+            id: '5',
             message: 'Post4',
             likeCount: 5
         },
